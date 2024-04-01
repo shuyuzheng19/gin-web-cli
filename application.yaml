@@ -1,0 +1,74 @@
+ip: &ip 172.18.101.79 #全局ip
+myEmail: #你的email
+ipDB: ip2region.xdb
+server: #服务器配置
+  release: false #是否为发布模式，如果为true，则禁用掉gin默认的日志和错误处理中间件
+  cron: true #是否开启定时任务
+  apiPrefix: /api/v1 # 全局api的前缀
+  addr: :8888 #监听端口
+  readTimeOut: 10 #单位秒
+  writeTimeOut: 10 #单位秒
+jwt: #jwt配置
+  encrypt: xiaoyuzuishuai #加密参数
+  expire: 10    #过期时间 单位:天
+upload: #文件上传配置
+  maxImageSize: 5 #允许上传图片的最大大小 单位MB
+  maxFileSize: 300 #允许上传文件的最大大小 单位MB
+  uri: http://localhost:8888/static #上传完毕之后 url的前缀
+  path: static #将上传的图片保存到某个位置  
+author:
+  name: 郑书宇
+  version: v1.0
+  home: https://www.shuyuz.com
+  github: https://www.gihub.com/shuyuzheng19
+email: #smtp服务配置
+  username: username #smtp账号
+  password: password #smtp密码
+  host: smtp.163.com #远程host
+  addr: smtp.163.com:25 #远程地址
+logger: #日志配置
+  encoding: console #输出模式
+  loggerDir: 
+  outputPaths: stdout #将日志写到哪个文件 如果是stdout则是输出到控制台
+  errorPaths:  #将错误日志写到哪个文件 如果是stderr则是输出到控制台
+  level: info #日志级别 info,warn,debug,error 默认是info
+  dev: false #是否开启开发者追踪
+db: #数据库配置
+  log: true #是否开启gorm日志打印
+  maxIdle: 10 #数据库空闲连接数
+  maxSize: 100 #数据库最大连接数
+  autoCreate: true #gorm自动生成结构体
+  database: postgresql #数据库厂商
+  host: *ip #远程数据库host
+  port: 5432 #数据库端口
+  username: root #数据库账号
+  password: root #数据库密码
+  dbname: postgres #数据库下的某个库
+  timezone: Asia/Shanghai #数据库的时区  
+redis: #redis相关配置
+  host: *ip #redis远程ip
+  port: 6379 #redis端口
+  password:  #redis密码
+  db: 0 #redis db
+  max_size: 10 #最大连接
+  min_idle: 2  #最小连接
+  timeout: 10 #连接超时 单位秒  
+cors: # cors配置
+  enable: true #是否开启跨域
+  allOrigins: true #是否允许所有都可以访问 如果为true，则下面的配置无效
+  allowOrigins: #支持跨域的远程地址
+    - http://127.0.0.1:8888
+  allowMethods: #支持跨域的方法
+    - GET
+    - POST
+    - PUT
+    - DELETE
+  allowHeaders: #支持跨域的请求头
+    - Origin
+    - Content-Type
+    - Authorization
+  exposeHeaders: #不支持跨域的请求头
+    - Access-Control-Allow-Origin
+    - Content-Length
+    - Access-Control-Allow-Header
+  allowCredentials: true  
